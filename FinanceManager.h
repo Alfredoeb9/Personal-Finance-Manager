@@ -27,44 +27,46 @@ class FinanceManager {
         std::vector<Expense> expenses;
         std::vector<Income> incomes;
 
-    // the & here makes it read-only access to the input string
-    void addExpense(const std::string& category, float amount, const std::string& date) {
-        expenses.push_back(Expense(category, amount, date));
-    }
-
-    void addIncome(const std::string& category, float amount, const std:: string& date) {
-        incomes.push_back(Income(category, amount, date));
-    }
-
-    void displayReport() {
-        float totalExpenses = 0;
-        float totalIncome = 0;
-
-        std::cout << "Expenses:\n";
-
-        for (const auto& expense : expenses) {
-            std::cout << "Category: " << expense.category 
-                    << ", Amount: $" << expense.amount 
-                    << ", Date: " << expense.date << std::endl;
-            totalExpenses += expense.amount;
-        }
-
-        std::cout << "Income:\n";
-
-        for (const auto& income : incomes) {
-            std::cout << "Source: " << income.source 
-                    << ", Amount: $" << income.amount 
-                    << ", Date: " << income.date << std::endl;
-            totalIncome += income.amount;
-        }
-
-        std::cout << "\nTotal Income: $" << totalIncome << std::endl;
-        std::cout << "Total Expenses: $" << totalExpenses << std::endl;
-        std::cout << "Balance: $" << (totalIncome - totalExpenses) << std::endl;
-    }
-
-    protected:
         // Handler for saveDatatoFile
-        virtual void saveDataToFile();
-        virtual void loadDataFromFile();
+        void saveDataToFile();
+        void loadDataFromFile();
+
+        // the & here makes it read-only access to the input string
+        void addExpense(const std::string& category, float amount, const std::string& date) {
+            expenses.push_back(Expense(category, amount, date));
+        }
+
+        void addIncome(const std::string& category, float amount, const std:: string& date) {
+            incomes.push_back(Income(category, amount, date));
+        }
+
+        void displayReport() {
+            float totalExpenses = 0;
+            float totalIncome = 0;
+
+            std::cout << "Expenses:\n";
+
+            for (const auto& expense : expenses) {
+                std::cout << "Category: " << expense.category 
+                        << ", Amount: $" << expense.amount 
+                        << ", Date: " << expense.date << std::endl;
+                totalExpenses += expense.amount;
+            }
+
+            std::cout << "Income:\n";
+
+            for (const auto& income : incomes) {
+                std::cout << "Source: " << income.source 
+                        << ", Amount: $" << income.amount 
+                        << ", Date: " << income.date << std::endl;
+                totalIncome += income.amount;
+            }
+
+            std::cout << "\nTotal Income: $" << totalIncome << std::endl;
+            std::cout << "Total Expenses: $" << totalExpenses << std::endl;
+            std::cout << "Balance: $" << (totalIncome - totalExpenses) << std::endl;
+        }
+
+    
+        
 };
