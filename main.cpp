@@ -5,10 +5,11 @@ using namespace std;
 void showMenu() {
     std::cout << "1. Add Expense\n";
     std::cout << "2. Add Income\n";
-    std::cout << "3. View Report\n";
-    std::cout << "4. Save Data\n";
-    std::cout << "5. Load Data\n";
-    std::cout << "6. Exit\n";
+    std::cout << "3. Set Budget\n";
+    std::cout << "4. View Report\n";
+    std::cout << "5. Save Data\n";
+    std::cout << "6. Load Data\n";
+    std::cout << "7. Exit\n";
 }
 
 int main() {
@@ -55,20 +56,36 @@ int main() {
                 std::cin >> amount;
                 std::cout << "Enter date (YYYY-MM-DD): ";
                 std::cin >> date;
-                
+
                 manager.addIncome(source, amount, date);
                 break;
             }
-            case 3:
+            case 3: {
+                std::string budgetCategory;
+                float budgetAmount;
+
+                manager.displayCategories();
+
+                std::cout << "Enter category for setting budget: ";
+                std::cin >> budgetCategory;
+                
+                std::cout << "Enter budget amount: ";
+                std::cin >> budgetAmount;
+
+                manager.setBudget(budgetCategory, budgetAmount);
+                std::cout << "Budget set for " << budgetCategory << " at $" << budgetAmount << "\n";
+                break;
+            }
+            case 4:
                 manager.displayReport();
                 break;
-            case 4:
+            case 5:
                 manager.saveDataToFile();
                 break;
-            case 5:
+            case 6:
                 manager.loadDataFromFile();
                 break;
-            case 6:
+            case 7:
                 running = false;
                 break;
             default:

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 struct Expense {
     std::string category;
@@ -30,6 +31,9 @@ class FinanceManager {
         // Predefined categories for expenses
         std::vector<std::string> predefinedCategories = {"Food", "Entertainment", "Transportation", "Bills", "Health", "Other"};
 
+        // Budgets for each category
+        std::unordered_map<std::string, float> categoryBudgets;
+
         // Handler for saveDatatoFile
         void saveDataToFile();
         void loadDataFromFile();
@@ -41,6 +45,11 @@ class FinanceManager {
 
         void addIncome(const std::string& category, float amount, const std:: string& date) {
             incomes.push_back(Income(category, amount, date));
+        }
+
+        // Set budget for a category
+        void setBudget(const std::string& category, float budget) {
+            categoryBudgets[category] = budget;
         }
 
         void displayReport() {
@@ -65,6 +74,23 @@ class FinanceManager {
                         << ", Date: " << income.date 
                         << std::endl;
                 totalIncome += income.amount;
+            }
+
+            // Optionally display budgeting details
+            std::cout << "\nBudget Report:\n";
+
+            for (const auto& budgetPair : categoryBudgets) {
+                float spend = 0;
+                
+                for (const auto& expense : expenses) {
+                    if (expense.category == budgetPair.first) {
+                        spend += expense.amount;
+                    }
+                }
+
+                std::cout << "Category: " << budgetPair.first
+                            << ", Budget: $" << budgetPair.second
+                            << ", Spend: $" << spend << "\n";
             }
 
             std::cout << "\nTotal Income: $" << totalIncome << std::endl;
