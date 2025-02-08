@@ -25,8 +25,19 @@ int main() {
             case 1: {
                 std::string category, date;
                 float amount;
-                std::cout << "Enter category: ";
+                // std::cout << "Enter category: ";
+                // std::cin >> category;
+
+                // Show available categories for expense
+                manager.displayCategories();
+                std::cout << "Enter category (or type 'Other' to input a custom category): ";
                 std::cin >> category;
+
+                if (category == "Other") {
+                    std::cout << "Enter your custom category: ";
+                    std::cin >> category; // User enters a custom category
+                }
+
                 std::cout << "Enter amount: ";
                 std::cin >> amount;
                 std::cout << "Enter date (YYYY-MM-DD): ";
@@ -37,12 +48,14 @@ int main() {
             case 2: {
                 std::string source, date;
                 float amount;
+
                 std::cout << "Enter source: ";
                 std::cin >> source;
                 std::cout << "Enter amount: ";
                 std::cin >> amount;
                 std::cout << "Enter date (YYYY-MM-DD): ";
                 std::cin >> date;
+                
                 manager.addIncome(source, amount, date);
                 break;
             }

@@ -27,6 +27,9 @@ class FinanceManager {
         std::vector<Expense> expenses;
         std::vector<Income> incomes;
 
+        // Predefined categories for expenses
+        std::vector<std::string> predefinedCategories = {"Food", "Entertainment", "Transportation", "Bills", "Health", "Other"};
+
         // Handler for saveDatatoFile
         void saveDataToFile();
         void loadDataFromFile();
@@ -49,7 +52,8 @@ class FinanceManager {
             for (const auto& expense : expenses) {
                 std::cout << "Category: " << expense.category 
                         << ", Amount: $" << expense.amount 
-                        << ", Date: " << expense.date << std::endl;
+                        << ", Date: " << expense.date 
+                        << std::endl;
                 totalExpenses += expense.amount;
             }
 
@@ -58,7 +62,8 @@ class FinanceManager {
             for (const auto& income : incomes) {
                 std::cout << "Source: " << income.source 
                         << ", Amount: $" << income.amount 
-                        << ", Date: " << income.date << std::endl;
+                        << ", Date: " << income.date 
+                        << std::endl;
                 totalIncome += income.amount;
             }
 
@@ -66,7 +71,12 @@ class FinanceManager {
             std::cout << "Total Expenses: $" << totalExpenses << std::endl;
             std::cout << "Balance: $" << (totalIncome - totalExpenses) << std::endl;
         }
-
     
-        
+        // Display predefined categories for expenses
+    void displayCategories() {
+        std::cout << "Available Categories:\n";
+        for (const auto& category : predefinedCategories) {
+            std::cout << "- " << category << std::endl;
+        }
+    }
 };
