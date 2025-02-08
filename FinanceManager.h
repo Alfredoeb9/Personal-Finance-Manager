@@ -27,6 +27,7 @@ class FinanceManager {
         std::vector<Expense> expenses;
         std::vector<Income> incomes;
 
+    // the & here makes it read-only access to the input string
     void addExpense(const std::string& category, float amount, const std::string& date) {
         expenses.push_back(Expense(category, amount, date));
     }
@@ -61,4 +62,9 @@ class FinanceManager {
         std::cout << "Total Expenses: $" << totalExpenses << std::endl;
         std::cout << "Balance: $" << (totalIncome - totalExpenses) << std::endl;
     }
+
+    protected:
+        // Handler for saveDatatoFile
+        virtual void saveDataToFile();
+        virtual void loadDataFromFile();
 };
